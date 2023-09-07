@@ -1,34 +1,45 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const port = 3000||process.env.PORT;
-const path = require('path');
-
+const port = 3000 || process.env.PORT;
 
 // middleware
 app.use(express.urlencoded({ extended: true }));
 
-
-
 // routes
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
+  try {
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const slackName = req.query.slack_name;
+    const track = req.query.track;
     let data = {
-        "slack_name": "Oluwaseun Adesina",
-        "current_day": "Monday",
-        "utc_time": "2023-08-21T15:04:05Z",
-        "track": "backend",
-        "github_file_url": "https://github.com/username/repo/blob/main/file_name.ext",
-        "github_repo_url": "https://github.com/username/repo",
-        "status_code": 200
-      }
+      slack_name: slackName || "Oluwaseun Adesina",
+      current_date: daysOfWeek[new Date().getDay()],
+      utc_time: new Date().toISOString(),
+      track: track || "backend",
+      github_file_url:
+        "https://github.com/oluwaseun-Adesina/task_one/blob/main/app.js",
+      github_repo_url: "https://github.com/oluwaseun-Adesina/task_one",
+      status_code: 200,
+    };
     res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
-app.post('/login', (req, res) => {
-    console.log(req.body);
-    res.send('Successfully posted data');
-
+app.post("/login", (req, res) => {
+  console.log(req.body);
+  res.send("Successfully posted data");
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });
