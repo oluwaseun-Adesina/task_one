@@ -19,10 +19,12 @@ app.get("/api", (req, res) => {
     ];
     const slackName = req.query.slack_name;
     const track = req.query.track;
+    const now = new Date();
+    const utcTime = now.toISOString().slice(0, -5) + 'Z';
     let data = {
       slack_name: slackName,
       current_day: daysOfWeek[new Date().getDay()],
-      utc_time: new Date().toISOString(),
+      utc_time: utcTime,
       track: track,
       github_file_url:
         "https://github.com/oluwaseun-Adesina/task_one/blob/main/app.js",
