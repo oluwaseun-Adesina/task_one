@@ -20,10 +20,10 @@ app.get("/", (req, res) => {
     const slackName = req.query.slack_name;
     const track = req.query.track;
     let data = {
-      slack_name: slackName || "Oluwaseun Adesina",
+      slack_name: slackName,
       current_date: daysOfWeek[new Date().getDay()],
       utc_time: new Date().toISOString(),
-      track: track || "backend",
+      track: track,
       github_file_url:
         "https://github.com/oluwaseun-Adesina/task_one/blob/main/app.js",
       github_repo_url: "https://github.com/oluwaseun-Adesina/task_one",
