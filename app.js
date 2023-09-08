@@ -21,7 +21,7 @@ app.get("/api", (req, res) => {
     const track = req.query.track;
     let data = {
       slack_name: slackName,
-      current_date: daysOfWeek[new Date().getDay()],
+      current_day: daysOfWeek[new Date().getDay()],
       utc_time: new Date().toISOString(),
       track: track,
       github_file_url:
